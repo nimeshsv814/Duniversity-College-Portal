@@ -1,0 +1,32 @@
+version: '3.8'
+
+networks:
+  duniversity-net
+
+volumes:
+  duniversity-vol
+
+services:
+  duniversity-portal:
+    image: nimeshsv814/duniversity-portal:v1.1.0
+    container_name: duniversity-portal
+    ports:
+      - "81:3000"
+    network:
+      - duniversity-net
+    .env_file:
+      - .env
+
+  mariadb:
+    image: mariadb:12.3.1-ubi10-rc
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - duniversity-vol
+    networks:
+      - duniversity-net
+    env_file:
+      - .env
+    
+    
