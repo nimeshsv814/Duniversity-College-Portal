@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duniversity-deploy
+  namespace: nimesh-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: duniv
+  strategy:
+    type: RollingUpdates
+    rollingUpdates:
+      maxUnavailable: 1
+      maxSurge: 1
+  templates:
+    metadata:
+      labels:
+        app: duniv
+    spec:
+      containers:
+      - name: duniv-app
+        image: nimeshsv814/duniversity-portal:v1.1.0
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+        env:
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: duniv-config
+                key: DB_HOST
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: duniv-config
+                key: DB_PORT
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: duniv-secret
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: duniv-secret
+                key: DB_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: duniv-svc
+  namespace: nimesh-ns
+spec:
+  selector:
+    app: duniv
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: ClusterIP

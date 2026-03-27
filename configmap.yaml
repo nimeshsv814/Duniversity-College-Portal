@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metdata:
+  name: duniv-config
+  namespace: nimesh-ns
+data:
+  DB_HOST: mariadb
+  DB_PORT: 3306
