@@ -4,5 +4,5 @@ metadata:
   name: duniv-config
   namespace: nimesh-ns
 data:
-  DB_HOST: "mariadb"
+  DB_HOST: "mysql-svc"
   DB_PORT: "3306"
