@@ -13,7 +13,7 @@ spec:
     rollingUpdates:
       maxUnavailable: 1
       maxSurge: 1
-  templates:
+  template:
     metadata:
       labels:
         app: duniv
