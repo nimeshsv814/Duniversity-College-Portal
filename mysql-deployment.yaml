@@ -54,7 +54,7 @@ spec:
       volumes:
       - name: mysql-storage
         persistentVolumeClaim:
-          claimName: duniv-pvc
+          claimName: duniv-pvc1
       - name: mysql-q
         configMap:
           name: mysql-init
