@@ -4,7 +4,7 @@ metadata:
   name: mysql-query
   namespace: nimesh-ns
 data:
-  initdb: |
+  initdb.sql: |
     "-- Create databases
     CREATE DATABASE IF NOT EXISTS grievance_db;
     CREATE DATABASE IF NOT EXISTS leave_db;
