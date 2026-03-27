@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: duniv-pvc
+  name: duniv-pvc1
   namespace: nimesh-ns
 spec:
   accessModes:
