@@ -6,7 +6,7 @@ metadata:
  
 spec:
   parentRefs:
-    - name: kgatewayD
+    - name: kgatewayd
   rules: #path based routing
     - matches:
       - path:
