@@ -57,7 +57,7 @@ spec:
           claimName: duniv-pvc
       - name: mysql-q
         configMap:
-          name: mysql-query
+          name: mysql-init
         
 ---
 apiVersion: v1
