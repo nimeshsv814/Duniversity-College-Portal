@@ -6,4 +6,3 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.0.1.99
   share: /var/nfs/general/duniversity
-  readOnly: "false"
