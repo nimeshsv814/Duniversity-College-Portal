@@ -31,11 +31,11 @@ spec:
             memory: "512Mi"
             cpu: "200m"
         env:
-          - name: MARIADB_ROOT_PASSWORD
+          - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: duniv-secret
-                key: MARIADB_ROOT_PASSWORD
+                key: MYSQL_ROOT_PASSWORD
           - name: DB_USER
             valueFrom:
               secretKeyRef:
