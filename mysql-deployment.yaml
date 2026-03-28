@@ -4,7 +4,7 @@ metadata:
   name: mysql-deploy
   namespace: nimesh-ns
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: mysql
