@@ -8,6 +8,7 @@ spec:
   selector:
     matchLabels:
       app: mysql
+  serviceName: "mariadb"
   minReadySeconds: 10
   strategy:
     type: RollingUpdate
