@@ -2,6 +2,7 @@ apiVersion: pxc.percona.com/v1
 kind: PerconaXtraDBCluster
 metadata:
   name: percona-cluster
+  namespace: nimesh-ns
 spec:
   crVersion: 1.14.0
   secretsName: my-cluster-secrets
