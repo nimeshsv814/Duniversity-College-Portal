@@ -50,22 +50,26 @@ spec:
                 name: duniv-secret
                 key: DB_PASSWORD
         volumeMounts:
-          - name: mysql-storage
+          - name: mysql-vct
             mountPath: /var/lib/mysql
           - name: mysql-q
             mountPath: /docker-entrypoint-initdb.d
-      volumeClaimTemplates:
+      volumes:
+      - name: mysql-q
+        configMap:
+          name: mysql-init
+  volumeClaimTemplates:
       # - name: mysql-storage
       #   persistentVolumeClaim:
       #     claimName: duniv-pvc1
-      - metadata:
-          name: mysql-vct
-        spec:
-          accessModes: ["ReadWriteMany"]
-          storageClassName: storaged
-          resources:
-            requests:
-              storage: "2Gi"
+    - metadata:
+        name: mysql-vct
+      spec:
+        accessModes: ["ReadWriteMany"]
+        storageClassName: storaged
+        resources:
+          requests:
+            storage: "2Gi"
       volumes:
       - name: mysql-q
         configMap:
