@@ -1,0 +1,15 @@
+apiVersion: pxc.percona.com/v1
+kind: PerconaXtraDBCluster
+metadata:
+  name: percona-cluster
+spec:
+  crVersion: 1.14.0
+  secretsName: my-cluster-secrets
+  pxc:
+    size: 3
+    image: percona/percona-xtradb-cluster:8.0
+    volumeSpec:
+      persistentVolumeClaim:
+        resources:
+          requests:
+            storage: 5Gi
