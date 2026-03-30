@@ -1,20 +1,15 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-deploy
+  name: {{ .Values.backend.name }}
   namespace: nimesh-ns
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: mysql
   serviceName: "mariadb"
   minReadySeconds: 10
-  # updateStrategy:
-  #   type: RollingUpdate
-  #   rollingUpdate:
-  #     maxUnavailable: 1
-  #     maxSurge: 1
   template:
     metadata:
       labels:
@@ -23,9 +18,9 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: mysql-cont
-        image: mysql:8.0
+        image: {{ .Values.backend_image.repository }}:{{ .Values.backend_image.tag }}
         ports:
-        - containerPort: 3306
+        - containerPort: {{ .Values.backend.ports.containerPort}}
         resources:
           requests:
             memory: "256Mi"
@@ -59,9 +54,6 @@ spec:
         configMap:
           name: mysql-init
   volumeClaimTemplates:
-      # - name: mysql-storage
-      #   persistentVolumeClaim:
-      #     claimName: duniv-pvc1
     - metadata:
         name: mysql-vct
       spec:
@@ -75,7 +67,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariadb
+  name: {{ .Values.backend_service.name}}
   namespace: nimesh-ns
 spec:
   selector:

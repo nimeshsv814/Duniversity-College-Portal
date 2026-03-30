@@ -3,9 +3,22 @@ app:
 
 replicaCount: 3
 
+
 image:
   repository: nimeshsv814/duniversity-portal
   tag: v1.1.0
 
 ports:
   containerPort: 3000
+
+backend:
+  name: mysql-deploy
+  ports:
+    containerPort: 3306
+
+backend_image:
+  repository: mysql
+  tag: 8.0
+
+backend_service:
+  name: mariadb
