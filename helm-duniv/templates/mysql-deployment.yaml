@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql-deploy
+  namespace: nimesh-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: "mariadb"
+  minReadySeconds: 10
+  # updateStrategy:
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxUnavailable: 1
+  #     maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql-cont
+        image: mysql:8.0
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: duniv-secret
+                key: MYSQL_ROOT_PASSWORD
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: duniv-secret
+                key: DB_USER
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: duniv-secret
+                key: DB_PASSWORD
+        volumeMounts:
+          - name: mysql-vct
+            mountPath: /var/lib/mysql
+          - name: mysql-q
+            mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mysql-q
+        configMap:
+          name: mysql-init
+  volumeClaimTemplates:
+      # - name: mysql-storage
+      #   persistentVolumeClaim:
+      #     claimName: duniv-pvc1
+    - metadata:
+        name: mysql-vct
+      spec:
+        accessModes: ["ReadWriteMany"]
+        storageClassName: storaged
+        resources:
+          requests:
+            storage: "2Gi"
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+  namespace: nimesh-ns
+spec:
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
+      targetPort: 3306
+  type: ClusterIP
+  clusterIP: None
