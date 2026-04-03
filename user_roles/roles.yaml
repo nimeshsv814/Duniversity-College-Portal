@@ -4,6 +4,6 @@ metadata:
   namespace: nimesh-ns
   name: pod-reader
 rules:
-- apiGroups: ["v1"]
+- apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
