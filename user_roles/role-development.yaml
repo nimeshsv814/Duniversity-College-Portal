@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: nimesh-ns
+  name: dev-role
+rules:
+- apiGroups: ["","app"]
+  resources: ["pods","deployments"]
+  verbs: ["get", "watch", "list","create","delete"]
