@@ -1,13 +1,17 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: raj-pod-access
+  name: nimesh-rolebind
   namespace: nimesh-ns
 subjects:
 - kind: User
   name: raj
   apiGroup: rbac.authorization.k8s.io
+- kind: ServiceAccount
+  name: nimesh-sa
+  namespace: nimesh-ns
+  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
-  name: pod-reader
+  name: nimesh-role
   apiGroup: rbac.authorization.k8s.io
