@@ -18,6 +18,8 @@ spec:
       labels:
         app: duniv
     spec:
+      nodeSelector:
+        training: devops
       containers:
       - name: duniv-app
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
