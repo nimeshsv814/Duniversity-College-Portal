@@ -15,6 +15,16 @@ spec:
       labels:
         app: mysql
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: training
+                operator: In
+                values:
+                  - devops
+            topologyKey: topology.kubernetes.io/zone
       terminationGracePeriodSeconds: 10
       containers:
       - name: mysql-cont
