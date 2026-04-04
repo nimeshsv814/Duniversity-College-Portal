@@ -16,6 +16,15 @@ spec:
         app: mysql
     spec:
       affinity:
+        # podAffinity:
+        #   requiredDuringSchedulingIgnoredDuringExecution:
+        #   - labelSelector:
+        #       matchExpressions:
+        #       - key: app
+        #         operator: In
+        #         values:
+        #           - duniv
+        #     topologyKey: "kubernetes.io/hostname"
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
