@@ -18,8 +18,25 @@ spec:
       labels:
         app: duniv
     spec:
-      nodeSelector:
-        training: devops
+      # nodeSelector:
+      #   training: devops
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: training
+                    operator: In
+                    values:
+                      - devops
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                - matchExpressions:
+                    - key: training
+                      operator: In
+                      values:
+                        - devops
       containers:
       - name: duniv-app
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
