@@ -15,6 +15,10 @@ spec:
       labels:
         app: mysql
     spec:
+      tolerations:
+        - key: "env"
+          operator: "Equal"
+          value: "dev"
       # affinity:
       #   # podAffinity:
       #   #   requiredDuringSchedulingIgnoredDuringExecution:
