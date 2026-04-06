@@ -22,7 +22,7 @@ spec:
         - key: "env"
           operator: "Equal"
           value: "prod"
-          effect: "NoSchedule"
+          effect: "PreferNoSchedule"
       # nodeSelector:
       #   training: devops
       # affinity:
