@@ -19,7 +19,7 @@ spec:
         - key: "env"
           operator: "Equal"
           value: "dev"
-          effect: "NoSchedule"
+          effect: "NoExecute"
       # affinity:
       #   # podAffinity:
       #   #   requiredDuringSchedulingIgnoredDuringExecution:
