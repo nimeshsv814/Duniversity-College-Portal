@@ -18,11 +18,11 @@ spec:
       labels:
         app: duniv
     spec:
-      tolerations:
-        - key: "env"
-          operator: "Equal"
-          value: "prod"
-          effect: "PreferNoSchedule"
+      # tolerations:
+      #   - key: "env"
+      #     operator: "Equal"
+      #     value: "prod"
+      #     effect: "PreferNoSchedule"
       # nodeSelector:
       #   training: devops
       # affinity:
@@ -34,14 +34,30 @@ spec:
       #               operator: In
       #               values:
       #               - devops
-      #   # preferredDuringSchedulingIgnoredDuringExecution:
-      #   #   - weight: 1
-      #   #     preference:
-      #   #       matchExpressions:
-      #   #         - key: training
-      #   #           operator: In
-      #   #           values:
-      #   #             - devops
+      #     preferredDuringSchedulingIgnoredDuringExecution:
+      #       - weight: 1
+      #         preference:
+      #           matchExpressions:
+      #             - key: training
+      #               operator: In
+      #               values:
+      #                 - devops
+      #     nodeAntiAffinity:
+      #       requiredDuringSchedulingIgnoredDuringExecution:
+      #         nodeSelectorTerms:
+      #           - matchExpressions:
+      #               - key: training
+      #                 operator: In
+      #                 values:
+      #                 - devops
+      #       preferredDuringSchedulingIgnoredDuringExecution:
+      #         - weight: 1
+      #           preference:
+      #             matchExpressions:
+      #               - key: training
+      #                 operator: In
+      #                 values:
+      #                   - devops
       containers:
       - name: duniv-app
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
