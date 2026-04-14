@@ -4,7 +4,9 @@ metadata:
   name: duniv-config
   namespace: nimesh-ns
 data:
-  DB_HOST: "mariadb"
+  DB_HOST_PRIMARY: "my-mysql-primary"
+  DB_HOST_SECONDARY: "my-mysql-secondary"
+  
   DB_PORT: "3306"
   GRIEVANCE_DB: "grievance_db"
   LEAVE_DB: "leave_db"

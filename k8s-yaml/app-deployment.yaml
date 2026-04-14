@@ -35,7 +35,7 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: duniv-config
-                key: DB_HOST
+                key: DB_HOST_PRIMARY
           - name: DB_PORT
             valueFrom:
               configMapKeyRef:
