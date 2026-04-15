@@ -13,7 +13,7 @@ ports:
 
 backend:
   name: mysql-deploy
-  replicaCount: 3
+  replicaCount: 2
   ports:
     containerPort: 3306
 
