@@ -11,13 +11,13 @@ spec:
     - matches:
       - path:
           type: PathPrefix
-          value: /duniv
+          value: /duniv/
       filters:
         - type: URLRewrite
           urlRewrite:
             path:
               type: ReplacePrefixMatch
-              replacePrefixMatch: /duniv
+              replacePrefixMatch: /
       backendRefs:
         - name: duniv-svc
           port: 3000
